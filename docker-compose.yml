@@ -1,0 +1,11 @@
+version: "3"
+services:
+  computation:
+    container_name: jupyter_container
+    build: docker/jupyter
+    volumes:
+      - ./NBA/:/home/jovyan/work
+    ports:
+      - "7777:8888"
+    env_file:
+      - config/jupyter.env
