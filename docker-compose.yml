@@ -9,3 +9,9 @@ services:
       - "7777:8888"
     env_file:
       - config/jupyter.env
+  triple_storage:
+    container_name: neo4j_container
+    image: neo4j
+    ports:
+      - "7474:7474"
+      - "7687:7687"
