@@ -1,1 +1,10 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# dont track keys
 *.env
+
+# Other stuff
+*.DS_STORE
