@@ -1,0 +1,11 @@
+# P<ython byproducts
+__pycache__/
+*.py[cod]
+*$py.class
+*.ipynb_checkpoints/*
+
+# dont track keys
+*.env
+
+# Other stuff
+*.DS_STORE
