@@ -5,6 +5,7 @@ USER root
 RUN pip install \
 psycopg2-binary \
 boto3 \
-inflection
+inflection \
+py2neo
 
 USER jovyan
