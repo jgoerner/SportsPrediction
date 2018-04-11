@@ -15,3 +15,8 @@ services:
     ports:
       - "7474:7474"
       - "7687:7687"
+  relational_storage:
+    container_name: postgres_container
+    image: postgres
+    ports:
+      - "5432:5432"
