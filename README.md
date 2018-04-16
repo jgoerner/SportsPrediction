@@ -2,7 +2,7 @@
 Predicting Sport Event outcomes.
 
 ## How to ramp up the stack
-1. put a `jupyter.env` into `config/` with appropriate access keys
+1. put a `jupyter.env` and a `neo4j.env` into `config/` with appropriate access keys & variables
 2. `docker-compose build --no-cache`
 3. `docker-compse up -d`
 
