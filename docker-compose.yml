@@ -17,6 +17,6 @@ services:
       - "7687:7687"
   relational_storage:
     container_name: postgres_container
-    image: postgres
+    build: docker/postgres
     ports:
       - "5432:5432"
