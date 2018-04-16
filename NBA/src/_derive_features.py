@@ -11,13 +11,13 @@ def derive_features():
     ]
     
     print("\n" + "/"*112)
-    print("/" + " "*47 + "Processing Features" + " "*46 + "/")
+    print("/" + " "*46 + "Processing Features" + " "*45 + "/")
     print("/"*112 + "\n\n")
     
     for f in features:
-        print("#"*(len(f.__name__)+13))
-        print("# Deriving {} #".format(f.__name__))
-        print("#"*(len(f.__name__)+13))
+        print("#"*(len(f.__name__)+15))
+        print("# Processing {} #".format(f.__name__))
+        print("#"*(len(f.__name__)+15))
         try:
             t_name = f()
             print("Created\n\n")
