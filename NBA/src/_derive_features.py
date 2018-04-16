@@ -1,15 +1,17 @@
 from features import (
+    create_player_college_triples,
     create_team_triples,
 )
 
 def derive_features():
     # explicitly define features to be derived
     features = [
-        create_team_triples
+        create_player_college_triples,
+        create_team_triples,
     ]
     
     print("\n" + "/"*112)
-    print("/" + " "*47 + "Deriving Features" + " "*46 + "/")
+    print("/" + " "*47 + "Processing Features" + " "*46 + "/")
     print("/"*112 + "\n\n")
     
     for f in features:
