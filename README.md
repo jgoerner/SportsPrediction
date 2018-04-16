@@ -8,6 +8,7 @@ Predicting Sport Event outcomes.
 
 ## How to run automatized tasks
 - `make data`: will fetch all CSVs from S3 and persist them inside of the postgres container
+- `make features`: will derive all features specified in `src/_derive_features.py`
 
 ## How to access Web-UIs
 - Jupyter: `http://localhost:7777`
