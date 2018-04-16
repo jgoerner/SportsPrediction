@@ -15,8 +15,10 @@ services:
     ports:
       - "7474:7474"
       - "7687:7687"
+    env_file:
+      - config/neo4j.env
   relational_storage:
     container_name: postgres_container
-    image: postgres
+    build: docker/postgres
     ports:
       - "5432:5432"
