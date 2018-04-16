@@ -1,7 +1,11 @@
+import os
+
 import boto3
 import inflection
 import pandas as pd
-from sqlalchemy import create_engine, text
+from sqlalchemy import text
+
+from utils.postgres import get_connection as pg_connection
 
 # S3 stuff
 BUCKET = "jgoerner-nba"
@@ -12,7 +16,7 @@ s3_folder_mapping = {
 }
 
 # postgres connection
-engine = create_engine("postgres://postgres:postres@postgres_container:5432")
+engine = pg_connection(os.environ["PG_USR"], os.environ["PG_PW"])
 
 # query template 
 query = text('SELECT * FROM pg_catalog.pg_tables WHERE tablename=:table')
