@@ -4,6 +4,8 @@ services:
     build: docker/jupyter
     ports:
       - "8888:8888"
+    volumes:
+      - ./NBA/notebooks:/home/jovyan/work
     env_file:
       - config/neo4j.env
   neo4j:
@@ -11,5 +13,10 @@ services:
     ports:
       - "7474:7474"
       - "7687:7687"
+    volumes:
+      - neo4j_data:/data
     env_file:
       - config/neo4j.env
+
+volumes:
+  neo4j_data:
