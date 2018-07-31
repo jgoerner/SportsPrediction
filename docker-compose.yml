@@ -5,7 +5,7 @@ services:
     ports:
       - "8888:8888"
     volumes:
-      - ./NBA/notebooks:/home/jovyan/work
+      - ./NBA/:/home/jovyan/work
     env_file:
       - config/neo4j.env
   neo4j:

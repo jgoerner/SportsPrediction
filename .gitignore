@@ -1,8 +1,8 @@
-# P<ython byproducts
+# Python byproducts
 __pycache__/
 *.py[cod]
 *$py.class
-*.ipynb_checkpoints/*
+.ipynb_checkpoints
 
 # dont track keys
 *.env
