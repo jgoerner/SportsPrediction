@@ -6,17 +6,6 @@ from neomodel import (
     StringProperty,
 )
 
-class Team(StructuredNode):
-    """Boilerplate for a team node
-    
-    Attributes:
-        name (str): name of the team
-        acr (str): three-letter acronym of the team name
-    """
-    
-    #PROPERTIES
-    acr = StringProperty(unique_index=True, required=True)
-    name = StringProperty(required=True)
 
 
 class Country(StructuredNode):
@@ -60,6 +49,31 @@ class City(StructuredNode):
     state = RelationshipTo(State, "IS_IN")
 
 
+
+class Conference(StructuredNode):
+    """Boilerplate for a conference node
+    
+    Attributes:
+        name (str): name of a conference
+    """
+
+    # PROPERTIES
+    name = StringProperty(required=True)   
+    
+
+class Division(StructuredNode):
+    """Boilerplate for a division node
+    
+    Attributes:
+        name (str): name of a division
+    """
+
+    # PROPERTIES
+    name = StringProperty(required=True)
+    
+    # RELATIONSHIPS
+    conference = RelationshipTo(Conference, "BELONGS_TO")
+
 class Arena(StructuredNode):
     """Boilerplate for an arena node
     
@@ -76,4 +90,24 @@ class Arena(StructuredNode):
     lon = FloatProperty(required=True)
     
     # RELATIONSHIPS
-    city = RelationshipTo(City, "IS_IN")
+    city = RelationshipTo(City, "IS_IN")    
+
+    
+class Team(StructuredNode):
+    """Boilerplate for a team node
+    
+    Attributes:
+        name (str): name of the team
+        acr (str): three-letter acronym of the team name
+    """
+    
+    #PROPERTIES
+    name = StringProperty(required=True)
+    
+    # RELATIONSHIPS
+    division = RelationshipTo(Division, "PLAYS_IN")
+    arena = RelationshipTo(Arena, "HAS_HOME_COURT_AT")
+    
+    
+
+
