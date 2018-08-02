@@ -7,7 +7,6 @@ from neomodel import (
 )
 
 
-
 class Country(StructuredNode):
     """Boilerplate for a team node
     
@@ -49,7 +48,6 @@ class City(StructuredNode):
     state = RelationshipTo(State, "IS_IN")
 
 
-
 class Conference(StructuredNode):
     """Boilerplate for a conference node
     
@@ -74,21 +72,6 @@ class Division(StructuredNode):
     # RELATIONSHIPS
     conference = RelationshipTo(Conference, "BELONGS_TO")
 
-class Team(StructuredNode):
-    """Boilerplate for a team node
-    
-    Attributes:
-        name (str): name of the team
-        acr (str): three-letter acronym of the team name
-    """
-    
-    #PROPERTIES
-    name = StringProperty(required=True)
-    
-    # RELATIONSHIPS
-    division = RelationshipTo(Division, "PLAYS_IN")
-    
-    
 
 class Arena(StructuredNode):
     """Boilerplate for an arena node
@@ -107,7 +90,24 @@ class Arena(StructuredNode):
     
     # RELATIONSHIPS
     city = RelationshipTo(City, "IS_IN")
+
+
+class Team(StructuredNode):
+    """Boilerplate for a team node
     
+    Attributes:
+        name (str): name of the team
+        acr (str): three-letter acronym of the team name
+    """
+    
+    #PROPERTIES
+    name = StringProperty(required=True)
+    
+    # RELATIONSHIPS
+    division = RelationshipTo(Division, "PLAYS_IN")
+    arena = RelationshipTo(Arena, "HAS_HOME_COURT")
+
+
 class Date(StructuredNode):
     """Boilerplate for an date node
     
@@ -120,9 +120,8 @@ class Date(StructuredNode):
     day = IntegerProperty(required=True)
     month = IntegerProperty(required=True)
     year = IntegerProperty(required=True)
-    
-   
-    
+
+
 class Season(StructuredNode):
     """Boilerplate for a season node
     
@@ -137,7 +136,7 @@ class Season(StructuredNode):
     season = RelationshipTo(Date, "starts")
     #season = RelationshipTo(Date, "ends")
 
-    
+
 class Game(StructuredNode):
     """Boilerplate for a game node
     
@@ -147,17 +146,10 @@ class Game(StructuredNode):
     """
 
     # PROPERTIES
-    type = StringProperty(required=True)
+    game_type = StringProperty(required=True)
     ot = IntegerProperty(required=True)
     
     # RELATIONSHIPS
     arena = RelationshipTo(Arena, "located_in")
     date = RelationshipTo(Date, "played_on")
     season = RelationshipTo(Season, "took_place_in")
-    
-    
-    
-    
-    
-    
-### SCORE tbd 
