@@ -72,14 +72,14 @@ class Division(StructuredNode):
     # RELATIONSHIPS
     conference = RelationshipTo(Conference, "BELONGS_TO")
 
-<<<<<<< HEAD
+
 class Arena(StructuredNode):
     """Boilerplate for an arena node
     
     name (str): name of the arena
     capacity (int): capacity of the arena
-    lat (float): latitude of arena
-    lon (float): longitude of arena
+    latitude (float): latitude of arena
+    longitude (float): longitude of arena
     """
     
     # PROPERTIES
@@ -89,51 +89,11 @@ class Arena(StructuredNode):
     longitude = FloatProperty(required=True)
     
     # RELATIONSHIPS
-    city = RelationshipTo(City, "IS_IN")    
-    
-class Team(StructuredNode):
-    """Boilerplate for a team node
-    
-    Attributes:
-        name (str): name of the team
-        acr (str): three-letter acronym of the team name
-    """
-    
-    #PROPERTIES
-    name = StringProperty(required=True)
-    
-    # RELATIONSHIPS
-    division = RelationshipTo(Division, "PLAYS_IN")
-    arena = RelationshipTo(Arena, "HAVE_HOME_COURT_AT")
-    
-    
-
-
-=======
-
-class Arena(StructuredNode):
-    """Boilerplate for an arena node
-    
-    name (str): name of the arena
-    capacity (int): capacity of the arena
-    lat (float): latitude of arena
-    lon (float): longitude of arena
-    """
-    
-    # PROPERTIES
-    name = StringProperty(required=True, unique_index=True)
-    capacity = IntegerProperty(required=True)
-    lat = FloatProperty(required=True)
-    lon = FloatProperty(required=True)
-    
-    # RELATIONSHIPS
     city = RelationshipTo(City, "IS_IN")
 
 
 class Team(StructuredNode):
-    """Boilerplate for a team node
->>>>>>> 4fb7eea20aab693ab8d4b7d6116acdd593d7634e
-    
+    """Boilerplate for a team node    
     Attributes:
         name (str): name of the team
         acr (str): three-letter acronym of the team name
