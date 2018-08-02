@@ -104,7 +104,7 @@ class Team(StructuredNode):
     
     # RELATIONSHIPS
     division = RelationshipTo(Division, "PLAYS_IN")
-    arena = RelationshipTo(Arena, "HAS_HOME_COURT")
+    arena = RelationshipTo(Arena, "HAVE_HOME_COURT_AT")
 
 
 class Date(StructuredNode):
