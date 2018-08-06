@@ -4,6 +4,7 @@ from neomodel import (
     RelationshipTo,
     StructuredNode,
     StringProperty,
+    DateTimeProperty
 )
 
 
@@ -92,33 +93,14 @@ class Arena(StructuredNode):
     city = RelationshipTo(City, "IS_IN")
 
 
-class Team(StructuredNode):
-    """Boilerplate for a team node    
-    Attributes:
-        name (str): name of the team
-        acr (str): three-letter acronym of the team name
-    """
-    
-    #PROPERTIES
-    name = StringProperty(required=True)
-    
-    # RELATIONSHIPS
-    division = RelationshipTo(Division, "PLAYS_IN")
-    arena = RelationshipTo(Arena, "HAVE_HOME_COURT_AT")
-
-
 class Date(StructuredNode):
     """Boilerplate for an date node
     
-    day (int): day dd
-    month (int): month mm
-    year (int): year yyyy
+    datetime (datetime.datetime): datetime of the game
     """
     
     # PROPERTIES
-    day = IntegerProperty(required=True)
-    month = IntegerProperty(required=True)
-    year = IntegerProperty(required=True)
+    datetime = DateTimeProperty(required=True)
 
 
 class Season(StructuredNode):
@@ -132,7 +114,7 @@ class Season(StructuredNode):
     name = StringProperty(required=True)
     
     # RELATIONSHIPS
-    season = RelationshipTo(Date, "starts")
+    season = RelationshipTo(Date, "STARTS")
     #season = RelationshipTo(Date, "ends")
 
 
@@ -145,10 +127,41 @@ class Game(StructuredNode):
     """
 
     # PROPERTIES
+    game_name = StringProperty(required=True)
     game_type = StringProperty(required=True)
     ot = IntegerProperty(required=True)
     
     # RELATIONSHIPS
-    arena = RelationshipTo(Arena, "located_in")
-    date = RelationshipTo(Date, "played_on")
-    season = RelationshipTo(Season, "took_place_in")
+    arena = RelationshipTo(Arena, "LOCATED_IN")
+    date = RelationshipTo(Date, "PLAYED_ON")
+    season = RelationshipTo(Season, "TOOK_PLACE_IN")
+
+
+class Score(StructuredNode):
+    """Boilerplate for a score node
+    
+    Attributes:
+        score (str): cumulated score
+    """
+
+    # PROPERTIES
+    score = StringProperty(required=True)
+    
+    # RELATIONSHIPS
+    in_game = RelationshipTo(Game, "IN_GAME")
+
+
+class Team(StructuredNode):
+    """Boilerplate for a team node    
+    Attributes:
+        name (str): name of the team
+        acr (str): three-letter acronym of the team name
+    """
+    
+    #PROPERTIES
+    name = StringProperty(required=True)
+    
+    # RELATIONSHIPS
+    division = RelationshipTo(Division, "PLAYS_IN")
+    arena = RelationshipTo(Arena, "HAVE_HOME_COURT_AT")
+    scored = RelationshipTo(Score, "SCORED")
