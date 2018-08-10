@@ -145,7 +145,7 @@ class Score(StructuredNode):
     """
 
     # PROPERTIES
-    score = StringProperty(required=True)
+    score = IntegerProperty(required=True)
     
     # RELATIONSHIPS
     in_game = RelationshipTo(Game, "IN_GAME")
