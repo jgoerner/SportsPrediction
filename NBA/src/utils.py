@@ -1,8 +1,48 @@
+from functools import wraps
 import os
+import time
+
 from neomodel import db
+
 
 def init_connection():
     """
     Initiates the connection to the Neo4J Docker
     """
     db.set_connection("bolt://{auth}@neo4j:7687".format(auth=os.environ["NEO4J_AUTH"].replace("/", ":")))
+
+
+def print_information(func):
+    """Decorator to print name and execution time of function
+    
+    Parameters
+    ----------
+    func: callable
+        function that shall be wrapped
+        
+    Remarks
+    -------
+    For the best result make sure that the func name is split by underscores 
+    """
+    
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        # print start block
+        name = " ".join(func.__name__.split("_"))
+        print("#"*(len(name)+4))
+        print("# {} #".format(name))
+        print("#"*(len(name)+4))
+        
+        # get start time
+        t1 = time.time()
+
+        # execute the function
+        func(*args, **kwargs)
+        
+        # get the end time
+        t2 = time.time()
+        
+        # print result
+        print("finished in {:.2f} seconds\n".format(t2-t1))
+    
+    return wrapper
