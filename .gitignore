@@ -7,5 +7,8 @@ __pycache__/
 # dont track keys
 *.env
 
+# dont track data
+data/
+
 # Other stuff
 *.DS_STORE
