@@ -8,6 +8,7 @@ services:
       - ./NBA/:/home/jovyan/work
     env_file:
       - config/neo4j.env
+      - config/aws.env
   neo4j:
     image: neo4j
     ports:

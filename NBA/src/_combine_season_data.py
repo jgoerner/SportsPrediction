@@ -1,12 +1,20 @@
 import dateparser
 import glob
 import os
+from pathlib import Path
 os.chdir("/home/jovyan/work")
 
 import numpy as np
 import pandas as pd
 
 from utils import print_information
+
+
+@print_information
+def create_season_file_dir():
+    out_path = Path("./data/season_files")
+    if not out_path.exists():
+        out_path.mkdir(parents=True)
 
 
 @print_information
@@ -76,6 +84,7 @@ def combine_season_1718_data():
     df.to_csv("./data/season_files/season1718.csv", sep=',', encoding='utf-8')
     
 if __name__ == "__main__":
+    create_season_file_dir()
     combine_season_1516_data()
     combine_season_1617_data()
     combine_season_1718_data()
