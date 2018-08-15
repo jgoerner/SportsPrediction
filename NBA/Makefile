@@ -1,4 +1,4 @@
-graph:
+graph: armageddon
 	@python src/_01_create_arena_city_state_country.py
     
 armageddon:
