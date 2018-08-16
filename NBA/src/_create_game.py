@@ -21,9 +21,9 @@ def connect_match_data_season_1516():
         # Visitor
         vt = Team.nodes.get(name=row["Visitor/Neutral"])
         # HomeScore
-        hs = Score(score=row["PTS"]).save()
+        hs = Score(score=row["PTS.1"]).save()
         # VisitorScore
-        vs = Score(score=row["PTS.1"]).save()
+        vs = Score(score=row["PTS"]).save()
         # Arena
         a = ht.arena.get()
         # Season
@@ -69,9 +69,9 @@ def connect_match_data_season_1617():
         # Visitor
         vt = Team.nodes.get(name=row["Visitor/Neutral"])
         # HomeScore
-        hs = Score(score=row["PTS"]).save()
+        hs = Score(score=row["PTS.1"]).save()
         # VisitorScore
-        vs = Score(score=row["PTS.1"]).save()
+        vs = Score(score=row["PTS"]).save()
         # Arena
         a = ht.arena.get()
         # Season
@@ -117,9 +117,9 @@ def connect_match_data_season_1718():
         # Visitor
         vt = Team.nodes.get(name=row["Visitor/Neutral"])
         # HomeScore
-        hs = Score(score=row["PTS"]).save()
+        hs = Score(score=row["PTS.1"]).save()
         # VisitorScore
-        vs = Score(score=row["PTS.1"]).save()
+        vs = Score(score=row["PTS"]).save()
         # Arena
         a = ht.arena.get()
         # Season
