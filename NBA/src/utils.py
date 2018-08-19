@@ -1,5 +1,8 @@
+import base64
 from functools import wraps
+import json
 import os
+import requests
 import time
 
 from neomodel import db
@@ -46,3 +49,28 @@ def print_information(func):
         print("finished in {:.2f} seconds\n".format(t2-t1))
     
     return wrapper
+
+
+def send_request(link):
+    """Send a request to MySportFeeds
+    
+    Parameters
+    ----------
+    link: string,
+        API endpoint that shall be queried
+    """
+    api_key = os.environ["MSF-TOKEN"]
+
+    try:
+        response = requests.get(
+            url=link,
+            params={
+                "fordate": "20161121"
+            },
+            headers={
+                "Authorization": "Basic " + base64.b64encode('{}:{}'.format(api_key,"MYSPORTSFEEDS").encode('utf-8')).decode('ascii')
+            }
+        )
+        return json.loads(response.text)
+    except requests.exceptions.RequestException:
+        print('HTTP Request failed')
