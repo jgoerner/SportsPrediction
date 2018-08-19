@@ -5,6 +5,7 @@ USER root
 RUN pip install --no-cache-dir \
   boto3 \
   neomodel \
-  dateparser
+  dateparser \
+  requests
 
 USER jovyan

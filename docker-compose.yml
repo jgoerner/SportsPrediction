@@ -9,6 +9,7 @@ services:
     env_file:
       - config/neo4j.env
       - config/aws.env
+      - config/msf.env
   neo4j:
     image: neo4j
     ports:
