@@ -85,6 +85,7 @@ class Arena(StructuredNode):
     
     # PROPERTIES
     name = StringProperty(required=True, unique_index=True)
+    venue_id = IntegerProperty(required=True, unique_index=True)
     capacity = IntegerProperty(required=True)
     latitude = FloatProperty(required=True)
     longitude = FloatProperty(required=True)
@@ -129,6 +130,7 @@ class Game(StructuredNode):
     # PROPERTIES
     game_name = StringProperty(required=True)
     game_type = StringProperty(required=True)
+    game_id = IntegerProperty(required=True, unique_index=True)
     ot = IntegerProperty(required=True)
     
     # RELATIONSHIPS
@@ -155,11 +157,14 @@ class Team(StructuredNode):
     """Boilerplate for a team node    
     Attributes:
         name (str): name of the team
-        acr (str): three-letter acronym of the team name
+        team_id (int): msf team ID
+        abbreviation (str): three-letter acronym of the team name
     """
     
     #PROPERTIES
     name = StringProperty(required=True)
+    team_id = IntegerProperty(required=True, unique_index=True)
+    abbreviation = StringProperty(required=True, unique_index=True)
     
     # RELATIONSHIPS
     division = RelationshipTo(Division, "PLAYS_IN")

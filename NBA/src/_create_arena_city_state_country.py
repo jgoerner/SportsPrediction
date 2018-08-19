@@ -15,6 +15,7 @@ def create_arena_nodes(df):
     for _, row in df.drop_duplicates(subset=["stadium"]).iterrows():
         arena = Arena(
             name=row["stadium"],
+            venue_id=row["venue_id"],
             capacity=int(row["capacity"].replace(",", "")),
             latitude=row["geo1"],
             longitude=row["geo2"]
@@ -70,7 +71,7 @@ def connect_arenas_cities_states_countries(df):
 
 if __name__ == "__main__":
     # read underlying data
-    df = pd.read_csv("./data/arenas.csv", delimiter=";")
+    df = pd.read_csv("./data/msf/arenas.csv", delimiter=";")
     df.columns = map(lambda x: x.strip(), df.columns)
     
     # connect to Neo4J
