@@ -14,8 +14,8 @@ def create_teams(df):
     n_nodes = 0
     for _, row in df.iterrows():
         team = Team(
-            name=row["team"]
-            abbreviation=row["abbreviation"]
+            name=row["team"],
+            abbreviation=row["abbreviation"],
             team_id=row["team_id"]
         )
         team.save()
@@ -61,7 +61,7 @@ def connect_teams_divisions_conferences(df):
     
 if __name__ == "__main__":
     # read underlying data
-    df = pd.read_csv("./data/msf/teams-divisions-conferences.csv", sep=";")    
+    df = pd.read_csv("./data/teams-divisions-conferences.csv", sep=";")    
     
     # connect to Neo4J
     init_connection()
