@@ -1,6 +1,6 @@
 data:
 	@python src/_fetch_data_from_s3.py
-	@python src/_combine_season_data.py
+	#@python src/_combine_season_data.py
 
 armageddon:
 	@python src/_clear_graph.py
