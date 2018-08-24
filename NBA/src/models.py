@@ -1,13 +1,58 @@
 from neomodel import (
+    BooleanProperty,
+    DateTimeProperty,
     FloatProperty,
     IntegerProperty,
     RelationshipTo,
     StructuredNode,
-    StringProperty,
-    DateTimeProperty
+    StringProperty
 )
 
 
+
+class Player(StructuredNode):
+    """Boilerplate for a player node
+    
+    Attributes:
+        msfID (int): My-Sports-Feed ID of the player
+        firstName (str): first name of the player
+        lastName (str): last name of the player
+        primaryPosition (str): primary position 
+        height (float): height of the player in cm
+        weight (float): weight of the player in kg
+        birthDate (datetime): day of birth
+        rookie (bool): flag indicating if the player is a rookie
+        shoots (str): primary throwing hand
+        officialImageSrc (str): URL of the official NBA "mugshot"
+        draftedYear (int): year the player was drafted
+        draftedRound (int): round the player was drafted
+        draftedRoundPick (int): position the player was drafted inside the draft round
+        draftedOverallPick (int): position the player was drafted overall
+        nbaID = (int): stats.nba ID of the player
+    """
+
+    # PROPERTIES
+    msfID = IntegerProperty(required=True, unique_index=True)
+    firstName = StringProperty(required=True)
+    lastName = StringProperty(required=True)
+    primaryPosition = StringProperty(required=True)
+    height = FloatProperty(required=True)
+    weight = FloatProperty(required=True)
+    birthDate = DateTimeProperty(required=True)
+    rookie = BooleanProperty(require=True)
+    shoots = StringProperty()
+    officialImageSrc = StringProperty(required=True)
+    draftedYear = IntegerProperty(required=True)
+    draftedRound = IntegerProperty(required=True)
+    draftedRoundPick = IntegerProperty(required=True)
+    draftedOverallPick = IntegerProperty(required=True)
+    nbaID = IntegerProperty() 
+    
+    # RELATIONSHIPS
+    # TODO: birthCity
+    # TODO: birthCountry
+    
+    
 class Country(StructuredNode):
     """Boilerplate for a team node
     
