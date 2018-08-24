@@ -14,7 +14,9 @@ def create_teams(df):
     n_nodes = 0
     for _, row in df.iterrows():
         team = Team(
-            name=row["team"]
+            name=row["team"],
+            abbreviation=row["abbreviation"],
+            team_id=row["team_id"]
         )
         team.save()
         n_nodes += 1

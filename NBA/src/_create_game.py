@@ -11,15 +11,15 @@ from models import Arena, Date, Game, Score, Season, Team
 
 @print_information
 def connect_match_data_season_1516():
-    df = pd.read_csv("./data/season_files/season1516.csv").drop(["Unnamed: 0"], axis=1)
+    df = pd.read_csv("./data/season_files/season1516.csv")
     n_rels = 0
     n_nodes = 0
     for _, row in df.iterrows():
         # NODES
         # Hometeam
-        ht = Team.nodes.get(name=row["Home/Neutral"])
+        ht = Team.nodes.get(abbreviation=row["Home/Neutral"])
         # Visitor
-        vt = Team.nodes.get(name=row["Visitor/Neutral"])
+        vt = Team.nodes.get(abbreviation=row["Visitor/Neutral"])
         # HomeScore
         hs = Score(score=row["PTS.1"]).save()
         # VisitorScore
@@ -36,6 +36,7 @@ def connect_match_data_season_1516():
         )[0]
         # Game
         g = Game(
+            game_id=row["game_id"],
             game_name=row["game_name"],
             game_type=row["game_type"],
             ot=row["OT"]).save() 
@@ -59,15 +60,15 @@ def connect_match_data_season_1516():
 
 @print_information
 def connect_match_data_season_1617():
-    df = pd.read_csv("./data/season_files/season1617.csv").drop(["Unnamed: 0"], axis=1)
+    df = pd.read_csv("./data/season_files/season1617.csv")
     n_rels = 0
     n_nodes = 0
     for _, row in df.iterrows():
         # NODES
         # Hometeam
-        ht = Team.nodes.get(name=row["Home/Neutral"])
+        ht = Team.nodes.get(abbreviation=row["Home/Neutral"])
         # Visitor
-        vt = Team.nodes.get(name=row["Visitor/Neutral"])
+        vt = Team.nodes.get(abbreviation=row["Visitor/Neutral"])
         # HomeScore
         hs = Score(score=row["PTS.1"]).save()
         # VisitorScore
@@ -84,6 +85,7 @@ def connect_match_data_season_1617():
         )[0]
         # Game
         g = Game(
+            game_id=row["game_id"],
             game_name=row["game_name"],
             game_type=row["game_type"],
             ot=row["OT"]).save() 
@@ -107,15 +109,15 @@ def connect_match_data_season_1617():
 
 @print_information
 def connect_match_data_season_1718():
-    df = pd.read_csv("./data/season_files/season1718.csv").drop(["Unnamed: 0"], axis=1)
+    df = pd.read_csv("./data/season_files/season1718.csv")
     n_rels = 0
     n_nodes = 0
     for _, row in df.iterrows():
         # NODES
         # Hometeam
-        ht = Team.nodes.get(name=row["Home/Neutral"])
+        ht = Team.nodes.get(abbreviation=row["Home/Neutral"])
         # Visitor
-        vt = Team.nodes.get(name=row["Visitor/Neutral"])
+        vt = Team.nodes.get(abbreviation=row["Visitor/Neutral"])
         # HomeScore
         hs = Score(score=row["PTS.1"]).save()
         # VisitorScore
@@ -132,6 +134,7 @@ def connect_match_data_season_1718():
         )[0]
         # Game
         g = Game(
+            game_id=row["game_id"],
             game_name=row["game_name"],
             game_type=row["game_type"],
             ot=row["OT"]).save() 

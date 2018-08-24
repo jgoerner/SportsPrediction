@@ -15,7 +15,7 @@ def connect_teams_arenas(df):
     for _, row in df.iterrows():
         # get entities
         a = Arena.nodes.get(name=row["stadium"])
-        t = Team.nodes.get(name=row["home_team"])
+        t = Team.nodes.get(abbreviation=row["home_team"])
 
         # create relationships
         t.arena.connect(a)
