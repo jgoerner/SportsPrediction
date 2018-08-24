@@ -1,3 +1,6 @@
+msf:
+	@python src/_generate_msf_season_file.py
+
 data:
 	@python src/_fetch_data_from_s3.py
 
