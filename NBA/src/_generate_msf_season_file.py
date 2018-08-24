@@ -116,7 +116,7 @@ def create_season_1718():
 
     
 if __name__ == "__main__":
-    if input("Do you  want to fetch MySportFeeds? (NO/yes)") == "yes":
+    if input("Fetch MySportFeeds Season API? (NO/yes)") == "yes":
         p = Path("./data/generated/season_files")
         if not p.exists():
             p.mkdir(parents=True)
