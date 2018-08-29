@@ -65,12 +65,14 @@ def send_request(link):
         response = requests.get(
             url=link,
             params={
-                "fordate": "20161121"
+                "fordate": "2018121"
             },
             headers={
                 "Authorization": "Basic " + base64.b64encode('{}:{}'.format(api_key,"MYSPORTSFEEDS").encode('utf-8')).decode('ascii')
             }
         )
+        print("{}: {}".format(response.status_code, response.reason))
         return json.loads(response.text)
     except requests.exceptions.RequestException:
+        print("{}: {}".format(response.status_code, response.reason))
         print('HTTP Request failed')
