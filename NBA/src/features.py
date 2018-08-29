@@ -35,6 +35,21 @@ FEATURES = {
         sea.name as season
     ORDER BY 
         team, season
+    """,
+    "average_play_marging_regular_season":
+    """
+    MATCH 
+        (t:Team)-[:SCORED]->(s:Score)-[:IN_GAME]->(g:Game)<-[:IN_GAME]-(s2:Score)<-[:SCORED]-(t2:Team), (sea:Season)
+    WHERE 
+        (g)-[:TOOK_PLACE_IN]->(sea)
+    AND
+        g.game_type= "regular_season"
+    RETURN 
+        t.name as team, 
+        avg(abs(s.score - s2.score)) as scoreMargin,
+        sea.name as season
+    ORDER BY 
+        team, season
     """
 }
 
