@@ -10,10 +10,11 @@ def _get_play_type(play):
     return (set(play.keys()) - set(["description", "playStatus"])).pop()
 
 
-def _unmarshall_jumpball(jumpball):
+def _unmarshall_jumpball(jumpball, game_id):
     result = {}
     
     # attributes
+    result["gameID"] = game_id
     result["name"] = jumpball["description"]
     result["wonBy"] = jumpball["jumpBall"]["wonBy"]
     
@@ -26,10 +27,11 @@ def _unmarshall_jumpball(jumpball):
     PARSED_GAMES["jumpball"].append(result)
     
     
-def _unmarshall_fieldGoalAttempt(fieldGoalAttempt):
+def _unmarshall_fieldGoalAttempt(fieldGoalAttempt, game_id):
     result = {}
     
     # attributes
+    result["gameID"] = game_id
     result["name"] = fieldGoalAttempt["description"]
     result["points"] = fieldGoalAttempt["fieldGoalAttempt"]["points"]
     result["result"] = fieldGoalAttempt["fieldGoalAttempt"]["result"]
@@ -54,10 +56,11 @@ def _unmarshall_fieldGoalAttempt(fieldGoalAttempt):
     PARSED_GAMES["fieldGoalAttempt"].append(result)
 
 
-def _unmarshall_turnover(turnover):
+def _unmarshall_turnover(turnover, game_id):
     result = {}
     
     # attributes
+    result["gameID"] = game_id
     result["name"] = turnover["description"]
     result["isStolen"] = turnover["turnover"]["isStolen"]
     result["type"] = turnover["turnover"]["type"]
@@ -76,10 +79,11 @@ def _unmarshall_turnover(turnover):
     PARSED_GAMES["turnover"].append(result)
 
 
-def _unmarshall_rebound(rebound):
+def _unmarshall_rebound(rebound, game_id):
     result = {}
     
     # attributes
+    result["gameID"] = game_id
     result["name"] = rebound["description"]
     result["type"] = rebound["rebound"]["type"]
     
@@ -96,10 +100,11 @@ def _unmarshall_rebound(rebound):
     PARSED_GAMES["rebound"].append(result)
 
 
-def _unmarshall_substitution(substitution):
+def _unmarshall_substitution(substitution, game_id):
     result = {}
     
     # attributes
+    result["gameID"] = game_id
     result["name"] = substitution["description"]
     
     # relationships
@@ -120,10 +125,11 @@ def _unmarshall_substitution(substitution):
     PARSED_GAMES["substitution"].append(result)
 
 
-def _unmarshall_freeThrowAttempt(freeThrowAttempt):
+def _unmarshall_freeThrowAttempt(freeThrowAttempt, game_id):
     result = {}
     
     # attributes
+    result["gameID"] = game_id
     result["name"] = freeThrowAttempt["description"]
     result["attemptNum"] = freeThrowAttempt["freeThrowAttempt"]["attemptNum"]
     result["result"] = freeThrowAttempt["freeThrowAttempt"]["result"]
@@ -137,10 +143,11 @@ def _unmarshall_freeThrowAttempt(freeThrowAttempt):
     PARSED_GAMES["freeThrowAttempt"].append(result)
 
 
-def _unmarshall_violation(violation):
+def _unmarshall_violation(violation, game_id):
     result = {}
     
     # attributes
+    result["gameID"] = game_id
     result["name"] = violation["description"]
     result["teamOrPersonal"] = violation["violation"]["teamOrPersonal"]
     
@@ -159,10 +166,11 @@ def _unmarshall_violation(violation):
     PARSED_GAMES["violation"].append(result)
 
 
-def _unmarshall_foul(foul):
+def _unmarshall_foul(foul, game_id):
     result = {}
     
     # attributes
+    result["gameID"] = game_id
     result["name"] = foul["description"]
     result["teamAbbreviation"] = foul["foul"]["team"]["abbreviation"]
     
