@@ -247,7 +247,7 @@ class Violation(StructuredNode):
     """Boilerplate for a Violation node
     
     Attributes:
-        name (str): name of the jumpball
+        name (str): name of the violation
         team_abbreviation (str): abbreviation of the player's team
         violation_type (str): personal foul or team foul
         elapsed_seconds (int): time after which play occured
@@ -272,7 +272,7 @@ class Turnover(StructuredNode):
     """Boilerplate for a Turnover node
     
     Attributes:
-        name (str): name of the jumpball
+        name (str): name of the turnover
         is_stolen (boolean): is the turnover a steal or not
         turnover_type (str): personal foul or team foul
         elapsed_seconds (int): time after which play occured
@@ -299,7 +299,7 @@ class Foul(StructuredNode):
     """Boilerplate for a Foul node
     
     Attributes:
-        name (str): name of the jumpball
+        name (str): name of the foul
         team_abbreviation (str): abbreviation of the fouling player's team
         foul_type (str): personal foul or team foul
         elapsed_seconds (int): time after which play occured
@@ -319,4 +319,35 @@ class Foul(StructuredNode):
     # RELATIONSHIPS
     drawn_by_player = RelationshipTo(Player, "DRAWN_BY")
     penalized_player = RelationshipTo(Player, "PENALIZED")
+    game = RelationshipTo(Game, "IN_GAME")
+
+
+class FieldGoalAttempt(StructuredNode):
+    """Boilerplate for a FieldGoalAttempt node
+    
+    Attributes:
+        name (str): name of the field goal attempt
+        points (int): points of the throw
+        result (str): result of the attempt
+        shot_type (str): type of the shot
+        elapsed_seconds (int): time after which play occured
+        quarter (int): quarter in which the play occured
+        shooting_player (Player): player who did the shot
+        assisting_player (Player): player who did assist
+        blocking_player (Player): player who did block
+        game (Game): game in which the attempt occured in
+    """
+    
+    # PROPERTIES
+    name = StringProperty(required=True)
+    points = IntegerProperty(required=True)
+    result = StringProperty(required=True)
+    shot_type = StringProperty(required=True)
+    elapsed_seconds = IntegerProperty(required=True)
+    quarter = IntegerProperty(required=True)
+    
+    # RELATIONSHIPS
+    shooting_player = RelationshipTo(Player, "SHOT_BY")
+    assisting_player = RelationshipTo(Player, "ASSISTED_BY")
+    blocking_player = RelationshipTo(Player, "BLOCKED_BY")
     game = RelationshipTo(Game, "IN_GAME")
