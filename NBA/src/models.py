@@ -398,3 +398,30 @@ class Substitution(StructuredNode):
     incoming_player = RelationshipTo(Player, "INCOMING")
     outgoing_player = RelationshipTo(Player, "OUTGOING")
     game = RelationshipTo(Game, "IN_GAME")
+
+
+class FreeThrowAttempt(StructuredNode):
+    """Boilerplate for a FreeThrowAttempt node
+    
+    Attributes:
+        name (str): name of the attempt
+        number (int): number of the attempt
+        total_attempts (int): number of total attempts
+        result (str): scored or missed
+        elapsed_seconds (int): time after which play occured
+        quarter (int): quarter in which the play occured
+        
+        shooting_player (Player): player shot the free throw
+        game (Game): game in which the turnover occured in
+    """
+    
+    # PROPERTIES
+    name = StringProperty(required=True)
+    number = IntegerProperty(required=True)
+    total_attempts = StringProperty(required=True)
+    elapsed_seconds = IntegerProperty(required=True)
+    quarter = IntegerProperty(required=True)
+    
+    # RELATIONSHIPS
+    shooting_player = RelationshipTo(Player, "SHOT_BY")
+    game = RelationshipTo(Game, "IN_GAME")
