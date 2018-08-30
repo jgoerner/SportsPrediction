@@ -215,3 +215,29 @@ class Team(StructuredNode):
     division = RelationshipTo(Division, "PLAYS_IN")
     arena = RelationshipTo(Arena, "HAVE_HOME_COURT_AT")
     scored = RelationshipTo(Score, "SCORED")
+
+
+class JumpBall(StructuredNode):
+    """Boilerplate for a state node
+    
+    Attributes:
+        name (str): name of the jumpball
+        won_by (str): AWAY or HOME
+        elapsed_seconds (int): time after which play occured
+        quarter (int): quarter in which the play occured
+        away_player (Player): away player of the jumpball
+        home_player (Player): home player of the jumpball
+        game (Game): game in which the jumpball occured in
+    """
+
+    # PROPERTIES
+    name = StringProperty(required=True)
+    won_by = StringProperty(required=True)
+    elapsed_seconds = IntegerProperty(required=True)
+    quarter = IntegerProperty(required=True)
+
+
+    # RELATIONSHIPS
+    away_player = RelationshipTo(Player, "BY_AWAY_PLAYER")
+    home_player = RelationshipTo(Player, "BY_HOME_PLAYER")
+    game = RelationshipTo(Game, "IN_GAME")
