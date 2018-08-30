@@ -40,13 +40,16 @@ def print_information(func):
         t1 = time.time()
 
         # execute the function
-        func(*args, **kwargs)
+        result = func(*args, **kwargs)
         
         # get the end time
         t2 = time.time()
         
         # print result
         print("finished in {:.2f} seconds\n".format(t2-t1))
+        
+        # return the result
+        return result
     
     return wrapper
 

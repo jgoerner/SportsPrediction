@@ -158,5 +158,5 @@ if __name__ == "__main__":
         p = Path("./data/generated")
         if not p.exists():
             p.mkdir(parents=True)
-    create_players()
-    print(">> Files can be found under ./data/generated <<")
+        create_players()
+        print(">> Files can be found under ./data/generated <<")

@@ -1,6 +1,7 @@
 msf:
 	@python src/_generate_msf_season_file.py
 	@python src/_generate_msf_player_file.py
+	@python src/_generate_msf_play_by_play_file.py
 
 data:
 	@python src/_fetch_data_from_s3.py
