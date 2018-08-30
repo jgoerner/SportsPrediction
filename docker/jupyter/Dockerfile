@@ -7,6 +7,7 @@ RUN pip install --no-cache-dir \
   neomodel \
   dateparser \
   requests \
-  arrow
+  arrow \
+  tqdm
 
 USER jovyan
