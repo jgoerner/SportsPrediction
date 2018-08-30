@@ -218,7 +218,7 @@ class Team(StructuredNode):
 
 
 class JumpBall(StructuredNode):
-    """Boilerplate for a state node
+    """Boilerplate for a Jumpball node
     
     Attributes:
         name (str): name of the jumpball
@@ -240,4 +240,56 @@ class JumpBall(StructuredNode):
     # RELATIONSHIPS
     away_player = RelationshipTo(Player, "BY_AWAY_PLAYER")
     home_player = RelationshipTo(Player, "BY_HOME_PLAYER")
+    game = RelationshipTo(Game, "IN_GAME")
+
+
+class Violation(StructuredNode):
+    """Boilerplate for a Violation node
+    
+    Attributes:
+        name (str): name of the jumpball
+        team_abbreviation (str): abbreviation of the player's team
+        violation_type (str): personal foul or team foul
+        elapsed_seconds (int): time after which play occured
+        quarter (int): quarter in which the play occured
+        player (Player): player who violated (if not team foul)
+        game (Game): game in which the violation occured in
+    """
+    
+    # PROPERTIES
+    name = StringProperty(required=True)
+    team_abbreviation = StringProperty(required=True)
+    vioalation_type = StringProperty(required=True)
+    elapsed_seconds = IntegerProperty(required=True)
+    quarter = IntegerProperty(required=True)
+    
+    # RELATIONSHIPS
+    player = RelationshipTo(Player, "VIOLOATED_BY")
+    game = RelationshipTo(Game, "IN_GAME")
+
+
+class Turnover(StructuredNode):
+    """Boilerplate for a Turnover node
+    
+    Attributes:
+        name (str): name of the jumpball
+        is_stolen (boolean): is the turnover a steal or not
+        turnover_type (str): personal foul or team foul
+        elapsed_seconds (int): time after which play occured
+        quarter (int): quarter in which the play occured
+        lost_by_player (Player): player who lost the ball
+        stolen_by_player (Player): player who stole the ball
+        game (Game): game in which the turnover occured in
+    """
+    
+    # PROPERTIES
+    name = StringProperty(required=True)
+    is_stolen = BooleanProperty(required=True)
+    turnover_type = StringProperty(required=True)
+    elapsed_seconds = IntegerProperty(required=True)
+    quarter = IntegerProperty(required=True)
+    
+    # RELATIONSHIPS
+    lost_by_player = RelationshipTo(Player, "LOST_BY")
+    stolen_by_player = RelationshipTo(Player, "STOLEN_BY")
     game = RelationshipTo(Game, "IN_GAME")
