@@ -374,3 +374,27 @@ class Rebound(StructuredNode):
     # RELATIONSHIPS
     retrieving_player = RelationshipTo(Player, "RETRIEVED_BY")
     game = RelationshipTo(Game, "IN_GAME")
+
+
+class Substitution(StructuredNode):
+    """Boilerplate for a Substitution node
+    
+    Attributes:
+        name (str): name of the turnover
+        elapsed_seconds (int): time after which play occured
+        quarter (int): quarter in which the play occured
+        
+        incoming_player (Player): player who enters the game
+        outgoing_player (Player): player who leaves the game
+        game (Game): game in which the subsitution occured in
+    """
+    
+    # PROPERTIES
+    name = StringProperty(required=True)
+    elapsed_seconds = IntegerProperty(required=True)
+    quarter = IntegerProperty(required=True)
+    
+    # RELATIONSHIPS
+    incoming_player = RelationshipTo(Player, "INCOMING")
+    outgoing_player = RelationshipTo(Player, "OUTGOING")
+    game = RelationshipTo(Game, "IN_GAME")
