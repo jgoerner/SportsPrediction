@@ -351,3 +351,26 @@ class FieldGoalAttempt(StructuredNode):
     assisting_player = RelationshipTo(Player, "ASSISTED_BY")
     blocking_player = RelationshipTo(Player, "BLOCKED_BY")
     game = RelationshipTo(Game, "IN_GAME")
+
+
+class Rebound(StructuredNode):
+    """Boilerplate for a rebound node
+    
+    Attributes:
+        name (str): name of the turnover
+        rebound_type (str): type of the rebound
+        elapsed_seconds (int): time after which play occured
+        quarter (int): quarter in which the play occured
+        retrieving_player (Player): player who retrieves
+        game (Game): game in which the turnover occured in
+    """
+    
+    # PROPERTIES
+    name = StringProperty(required=True)
+    rebound_type = StringProperty(required=True)
+    elapsed_seconds = IntegerProperty(required=True)
+    quarter = IntegerProperty(required=True)
+    
+    # RELATIONSHIPS
+    retrieving_player = RelationshipTo(Player, "RETRIEVED_BY")
+    game = RelationshipTo(Game, "IN_GAME")
