@@ -293,3 +293,30 @@ class Turnover(StructuredNode):
     lost_by_player = RelationshipTo(Player, "LOST_BY")
     stolen_by_player = RelationshipTo(Player, "STOLEN_BY")
     game = RelationshipTo(Game, "IN_GAME")
+
+
+class Foul(StructuredNode):
+    """Boilerplate for a Foul node
+    
+    Attributes:
+        name (str): name of the jumpball
+        team_abbreviation (str): abbreviation of the fouling player's team
+        foul_type (str): personal foul or team foul
+        elapsed_seconds (int): time after which play occured
+        quarter (int): quarter in which the play occured
+        drawn_by_player (Player): player who got fouled
+        penalized_player (Player): player who fouled
+        game (Game): game in which the foul occured in
+    """
+    
+    # PROPERTIES
+    name = StringProperty(required=True)
+    team_abbreviation = StringProperty(required=True)
+    foul_type = StringProperty(required=True)
+    elapsed_seconds = IntegerProperty(required=True)
+    quarter = IntegerProperty(required=True)
+    
+    # RELATIONSHIPS
+    drawn_by_player = RelationshipTo(Player, "DRAWN_BY")
+    penalized_player = RelationshipTo(Player, "PENALIZED")
+    game = RelationshipTo(Game, "IN_GAME")
