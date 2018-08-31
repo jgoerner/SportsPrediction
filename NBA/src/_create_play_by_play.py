@@ -74,7 +74,7 @@ def create_turnover():
 @print_information
 def create_fouls():
     df = pd.read_csv("./data/play_by_play_files/play_by_play_foul.csv")
-    for _, row in tqdm(df.head(6000).iterrows(), total=df.shape[0]):
+    for _, row in tqdm(df.iterrows(), total=df.shape[0]):
         f = Foul()
         f.name = row["name"]
         f.team_abbreviation = row["teamAbbreviation"]
