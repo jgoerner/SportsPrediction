@@ -40,13 +40,16 @@ def print_information(func):
         t1 = time.time()
 
         # execute the function
-        func(*args, **kwargs)
+        result = func(*args, **kwargs)
         
         # get the end time
         t2 = time.time()
         
         # print result
         print("finished in {:.2f} seconds\n".format(t2-t1))
+        
+        # return the result
+        return result
     
     return wrapper
 
@@ -65,12 +68,14 @@ def send_request(link):
         response = requests.get(
             url=link,
             params={
-                "fordate": "20161121"
+                "fordate": "2018121"
             },
             headers={
                 "Authorization": "Basic " + base64.b64encode('{}:{}'.format(api_key,"MYSPORTSFEEDS").encode('utf-8')).decode('ascii')
             }
         )
-        return json.loads(response.text)
+        print("{}: {}".format(response.status_code, response.reason))
+        return response
     except requests.exceptions.RequestException:
+        print("{}: {}".format(response.status_code, response.reason))
         print('HTTP Request failed')

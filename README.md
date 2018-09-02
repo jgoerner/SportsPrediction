@@ -13,5 +13,6 @@ Predicting Sport Event outcomes.
 ## How to build the graph
 - open a new terminal inside the Jupyter container
 - navigate to `/home/jovyan/work`
-- run `make -B graph`
-- confirm the promt question with `yes`
+- run `make -B data`
+- open a new terminal outside of the Docker container at the root of the repository
+- run `make backup`
