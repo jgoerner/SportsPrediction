@@ -50,6 +50,23 @@ FEATURES = {
         sea.name as season
     ORDER BY 
         team, season
+    """,
+    "all_games":
+    """
+    MATCH 
+        (t:Team)-[:SCORED]->(s:Score)-[:IN_GAME]->(g:Game)<-[:IN_GAME]-(s2:Score)<-[:SCORED]-(t2:Team), 
+        (sea:Season)
+    WHERE 
+        (g)-[:TOOK_PLACE_IN]->(sea)
+    AND
+        right(g.game_name, 3) = t.abbreviation
+    RETURN
+        sea.name as season,
+        t.name as team_home,
+        t2.name as team_guest,
+        s.score as score_home,
+        s2.score as score_guest,
+        CASE WHEN s.score > s2.score THEN 1 ELSE 0 END as home_win
     """
 }
 
