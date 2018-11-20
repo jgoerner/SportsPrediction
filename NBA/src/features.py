@@ -100,7 +100,7 @@ FEATURES = {
     ORDER BY 
         team, season
     """,
-    "average_play_marging_regular_season":
+    "average_score_margin_regular_season":
     """
     MATCH 
         (t:Team)-[:SCORED]->(s:Score)-[:IN_GAME]->(g:Game)<-[:IN_GAME]-(s2:Score)<-[:SCORED]-(t2:Team), (sea:Season)
@@ -110,7 +110,41 @@ FEATURES = {
         g.game_type= "regular_season"
     RETURN 
         t.name as team, 
-        avg(abs(s.score - s2.score)) as scoreMargin,
+        avg(abs(s.score - s2.score)) as score_margin,
+        sea.name as season
+    ORDER BY 
+        team, season
+    """,
+    "average_score_margin_regular_season_as_home":
+    """
+    MATCH 
+        (t:Team)-[:SCORED]->(s:Score)-[:IN_GAME]->(g:Game)<-[:IN_GAME]-(s2:Score)<-[:SCORED]-(t2:Team), (sea:Season)
+    WHERE 
+        (g)-[:TOOK_PLACE_IN]->(sea)
+    AND
+        g.game_type= "regular_season"
+    AND
+        right(g.game_name, 3) = t.abbreviation
+    RETURN 
+        t.name as team, 
+        avg(abs(s.score - s2.score)) as score_margin_as_home,
+        sea.name as season
+    ORDER BY 
+        team, season
+    """,
+    "average_score_margin_regular_season_as_guest":
+    """
+    MATCH 
+        (t:Team)-[:SCORED]->(s:Score)-[:IN_GAME]->(g:Game)<-[:IN_GAME]-(s2:Score)<-[:SCORED]-(t2:Team), (sea:Season)
+    WHERE 
+        (g)-[:TOOK_PLACE_IN]->(sea)
+    AND
+        g.game_type= "regular_season"
+    AND
+        right(g.game_name, 3) = t2.abbreviation
+    RETURN 
+        t.name as team, 
+        avg(abs(s.score - s2.score)) as score_margin_as_guest,
         sea.name as season
     ORDER BY 
         team, season
