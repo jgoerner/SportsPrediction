@@ -17,8 +17,8 @@ FEATURES = {
         (g)-[:TOOK_PLACE_IN]->(sea)
     RETURN 
         t.name as team, 
-        sum(CASE WHEN s.score > s2.score AND g.game_type = "regular_season" THEN 1 ELSE 0 END) as wins, 
-        sea.name as season
+        sea.name as season,
+        sum(CASE WHEN s.score > s2.score AND g.game_type = "regular_season" THEN 1 ELSE 0 END) as wins 
     ORDER BY 
         team, season
     """,
@@ -33,8 +33,8 @@ FEATURES = {
         right(g.game_name, 3) = t.abbreviation
     RETURN 
         t.name as team, 
-        sum(CASE WHEN s.score > s2.score AND g.game_type = "regular_season" THEN 1 ELSE 0 END) as wins_as_home, 
-        sea.name as season
+        sea.name as season,
+        sum(CASE WHEN s.score > s2.score AND g.game_type = "regular_season" THEN 1 ELSE 0 END) as wins_as_home
     ORDER BY 
         team, season
     """,
@@ -49,8 +49,8 @@ FEATURES = {
         right(g.game_name, 3) = t2.abbreviation
     RETURN 
         t.name as team, 
-        sum(CASE WHEN s.score > s2.score AND g.game_type = "regular_season" THEN 1 ELSE 0 END) as wins_as_guest, 
-        sea.name as season
+        sea.name as season,
+        sum(CASE WHEN s.score > s2.score AND g.game_type = "regular_season" THEN 1 ELSE 0 END) as wins_as_guest
     ORDER BY 
         team, season
     """,
@@ -63,8 +63,8 @@ FEATURES = {
         (g)-[:TOOK_PLACE_IN]->(sea)
     RETURN 
         t.name as team, 
-        sum(CASE WHEN s.score < s2.score AND g.game_type = "regular_season" THEN 1 ELSE 0 END) as losses, 
-        sea.name as season
+        sea.name as season,
+        sum(CASE WHEN s.score < s2.score AND g.game_type = "regular_season" THEN 1 ELSE 0 END) as losses
     ORDER BY 
         team, season
     """,
@@ -79,8 +79,8 @@ FEATURES = {
         right(g.game_name, 3) = t.abbreviation
     RETURN 
         t.name as team, 
-        sum(CASE WHEN s.score < s2.score AND g.game_type = "regular_season" THEN 1 ELSE 0 END) as losses_as_home, 
-        sea.name as season
+        sea.name as season,
+        sum(CASE WHEN s.score < s2.score AND g.game_type = "regular_season" THEN 1 ELSE 0 END) as losses_as_home
     ORDER BY 
         team, season
     """,
@@ -94,9 +94,9 @@ FEATURES = {
     AND
         right(g.game_name, 3) = t2.abbreviation
     RETURN 
-        t.name as team, 
-        sum(CASE WHEN s.score < s2.score AND g.game_type = "regular_season" THEN 1 ELSE 0 END) as losses_as_guest, 
-        sea.name as season
+        t.name as team,
+        sea.name as season,
+        sum(CASE WHEN s.score < s2.score AND g.game_type = "regular_season" THEN 1 ELSE 0 END) as losses_as_guest
     ORDER BY 
         team, season
     """,
@@ -110,8 +110,8 @@ FEATURES = {
         g.game_type= "regular_season"
     RETURN 
         t.name as team, 
-        avg(abs(s.score - s2.score)) as score_margin,
-        sea.name as season
+        sea.name as season,
+        avg(abs(s.score - s2.score)) as score_margin
     ORDER BY 
         team, season
     """,
@@ -126,9 +126,9 @@ FEATURES = {
     AND
         right(g.game_name, 3) = t.abbreviation
     RETURN 
-        t.name as team, 
-        avg(abs(s.score - s2.score)) as score_margin_as_home,
-        sea.name as season
+        t.name as team,
+        sea.name as season,
+        avg(abs(s.score - s2.score)) as score_margin_as_home
     ORDER BY 
         team, season
     """,
@@ -144,8 +144,8 @@ FEATURES = {
         right(g.game_name, 3) = t2.abbreviation
     RETURN 
         t.name as team, 
-        avg(abs(s.score - s2.score)) as score_margin_as_guest,
-        sea.name as season
+        sea.name as season,
+        avg(abs(s.score - s2.score)) as score_margin_as_guest
     ORDER BY 
         team, season
     """,
