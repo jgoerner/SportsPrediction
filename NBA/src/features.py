@@ -22,6 +22,38 @@ FEATURES = {
     ORDER BY 
         team, season
     """,
+    "wins_per_team_per_season_as_home":
+    """
+    MATCH 
+        (t:Team)-[:SCORED]->(s:Score)-[:IN_GAME]->(g:Game)<-[:IN_GAME]-(s2:Score)<-[:SCORED]-(t2:Team), 
+        (sea:Season)
+    WHERE 
+        (g)-[:TOOK_PLACE_IN]->(sea)
+    AND
+        right(g.game_name, 3) = t.abbreviation
+    RETURN 
+        t.name as team, 
+        sum(CASE WHEN s.score > s2.score AND g.game_type = "regular_season" THEN 1 ELSE 0 END) as wins_as_home, 
+        sea.name as season
+    ORDER BY 
+        team, season
+    """,
+    "wins_per_team_per_season_as_guest":
+    """
+    MATCH 
+        (t:Team)-[:SCORED]->(s:Score)-[:IN_GAME]->(g:Game)<-[:IN_GAME]-(s2:Score)<-[:SCORED]-(t2:Team), 
+        (sea:Season)
+    WHERE 
+        (g)-[:TOOK_PLACE_IN]->(sea)
+    AND
+        right(g.game_name, 3) = t2.abbreviation
+    RETURN 
+        t.name as team, 
+        sum(CASE WHEN s.score > s2.score AND g.game_type = "regular_season" THEN 1 ELSE 0 END) as wins_as_guest, 
+        sea.name as season
+    ORDER BY 
+        team, season
+    """,
     "losses_per_team_per_season": 
     """
     MATCH 
@@ -32,6 +64,38 @@ FEATURES = {
     RETURN 
         t.name as team, 
         sum(CASE WHEN s.score < s2.score AND g.game_type = "regular_season" THEN 1 ELSE 0 END) as losses, 
+        sea.name as season
+    ORDER BY 
+        team, season
+    """,
+    "losses_per_team_per_season_as_home":
+    """
+    MATCH 
+        (t:Team)-[:SCORED]->(s:Score)-[:IN_GAME]->(g:Game)<-[:IN_GAME]-(s2:Score)<-[:SCORED]-(t2:Team), 
+        (sea:Season)
+    WHERE 
+        (g)-[:TOOK_PLACE_IN]->(sea)
+    AND
+        right(g.game_name, 3) = t.abbreviation
+    RETURN 
+        t.name as team, 
+        sum(CASE WHEN s.score < s2.score AND g.game_type = "regular_season" THEN 1 ELSE 0 END) as losses_as_home, 
+        sea.name as season
+    ORDER BY 
+        team, season
+    """,
+    "losses_per_team_per_season_as_guest":
+    """
+    MATCH 
+        (t:Team)-[:SCORED]->(s:Score)-[:IN_GAME]->(g:Game)<-[:IN_GAME]-(s2:Score)<-[:SCORED]-(t2:Team), 
+        (sea:Season)
+    WHERE 
+        (g)-[:TOOK_PLACE_IN]->(sea)
+    AND
+        right(g.game_name, 3) = t2.abbreviation
+    RETURN 
+        t.name as team, 
+        sum(CASE WHEN s.score < s2.score AND g.game_type = "regular_season" THEN 1 ELSE 0 END) as losses_as_guest, 
         sea.name as season
     ORDER BY 
         team, season
