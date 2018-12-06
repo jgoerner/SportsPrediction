@@ -165,7 +165,27 @@ FEATURES = {
         s.score as score_home,
         s2.score as score_guest,
         CASE WHEN s.score > s2.score THEN 1 ELSE 0 END as home_win
+    """,
+    
+    #Features Iteration 2
+    "list_all_games_with_location": 
     """
+    MATCH (t:Team)-[sc:SCORED]->(s:Score)-[ig:IN_GAME]->(g:Game)-[po:PLAYED_ON]->(d:Date), (sea:Season), (a:Arena)
+    WHERE 
+        (g)-[:TOOK_PLACE_IN]->(sea)
+    AND
+        (g)-[:LOCATED_IN]->(a)
+    RETURN 
+        d.datetime as date,
+        t.name as team,  
+        g.game_id as game_id,
+        sea.name as Season,
+        a.name as Arenaname,
+        a.longitude as long,
+        a.latitude as lat
+    ORDER BY team, date
+    
+    """,
 }
 
 def get_feature(feature_name):
