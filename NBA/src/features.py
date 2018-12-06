@@ -184,7 +184,7 @@ FEATURES = {
         a.longitude as long,
         a.latitude as lat
     ORDER BY team, date
-    LIMIT 1000
+    
     """,
 }
 
