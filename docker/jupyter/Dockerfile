@@ -11,6 +11,7 @@ RUN pip install --no-cache-dir \
   dateparser \
   requests \
   arrow \
-  tqdm
+  tqdm \
+  mpu
 
 USER jovyan
