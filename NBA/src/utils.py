@@ -75,7 +75,7 @@ def send_request(link):
             }
         )
         print("{}: {}".format(response.status_code, response.reason))
-        return response
+        return response.json()
     except requests.exceptions.RequestException:
         print("{}: {}".format(response.status_code, response.reason))
         print('HTTP Request failed')
