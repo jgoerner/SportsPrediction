@@ -70,7 +70,7 @@ def create_season_1516():
     result1516_po = \
         send_request("https://api.mysportsfeeds.com/v2.0/pull/nba/2016-playoff/games.json")
     games_po1516 = \
-        list(map(lambda game: unmarshall_game(game), result1516_po.get("games")))
+        list(map(lambda game: unmarshall_game(game, game_type="playoff"), result1516_po.get("games")))
     df_reg = pd.DataFrame.from_records(games_reg1516)
     df_po = pd.DataFrame.from_records(games_po1516)
     df = df_reg.append(df_po)
@@ -88,7 +88,7 @@ def create_season_1617():
     result1617_po = \
         send_request("https://api.mysportsfeeds.com/v2.0/pull/nba/2017-playoff/games.json")
     games_po1617 = \
-        list(map(lambda game: unmarshall_game(game), result1617_po.get("games")))
+        list(map(lambda game: unmarshall_game(game, game_type="playoff"), result1617_po.get("games")))
     df_reg = pd.DataFrame.from_records(games_reg1617)
     df_po = pd.DataFrame.from_records(games_po1617)
     df = df_reg.append(df_po)
@@ -106,7 +106,7 @@ def create_season_1718():
     result1718_po = \
         send_request("https://api.mysportsfeeds.com/v2.0/pull/nba/2018-playoff/games.json")
     games_po1718 = \
-        list(map(lambda game: unmarshall_game(game), result1718_po.get("games")))
+        list(map(lambda game: unmarshall_game(game, game_type="playoff"), result1718_po.get("games")))
     df_reg = pd.DataFrame.from_records(games_reg1718)
     df_po = pd.DataFrame.from_records(games_po1718)
     df = df_reg.append(df_po)
