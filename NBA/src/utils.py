@@ -54,7 +54,7 @@ def print_information(func):
     return wrapper
 
 
-def send_request(link):
+def send_request(link, raw=False):
     """Send a request to MySportFeeds
     
     Parameters
@@ -75,7 +75,10 @@ def send_request(link):
             }
         )
         print("{}: {}".format(response.status_code, response.reason))
-        return response.json()
+        if raw:
+            return response
+        else:
+            return response.json()
     except requests.exceptions.RequestException:
         print("{}: {}".format(response.status_code, response.reason))
         print('HTTP Request failed')
