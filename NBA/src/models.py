@@ -3,6 +3,7 @@ from neomodel import (
     DateTimeProperty,
     FloatProperty,
     IntegerProperty,
+    RelationshipFrom,
     RelationshipTo,
     StructuredNode,
     StringProperty
@@ -425,3 +426,67 @@ class FreeThrowAttempt(StructuredNode):
     # RELATIONSHIPS
     shooting_player = RelationshipTo(Player, "SHOT_BY")
     game = RelationshipTo(Game, "IN_GAME")
+
+
+class Stat(StructuredNode):
+    """Boilerplate for a Stat Node
+    
+    Attributes:
+        name (str): unique surrogate ID
+        season_type (str): Regular Season or Playoffs
+        45 other performance attributes
+    """
+    
+    # Attributes
+    name = StringProperty(required=True)
+    season_type = StringProperty(required=True)
+    GamesPlayed = IntegerProperty(required=True)
+    Fg2PtAtt = IntegerProperty(required=True)
+    Fg2PtAttPerGame = IntegerProperty(required=True)
+    Fg2PtMade = IntegerProperty(required=True)
+    Fg2PtMadePerGame = IntegerProperty(required=True)
+    Fg2PtPct = IntegerProperty(required=True)
+    Fg3PtAtt = IntegerProperty(required=True)
+    Fg3PtAttPerGame = IntegerProperty(required=True)
+    Fg3PtMade = IntegerProperty(required=True)
+    Fg3PtMadePerGame = IntegerProperty(required=True)
+    Fg3PtPct = IntegerProperty(required=True)
+    FgAtt = IntegerProperty(required=True)
+    FgAttPerGame = IntegerProperty(required=True)
+    FgMade = IntegerProperty(required=True)
+    FgMadePerGame = IntegerProperty(required=True)
+    FgPct = IntegerProperty(required=True)
+    FtAtt = IntegerProperty(required=True)
+    FtAttPerGame = IntegerProperty(required=True)
+    FtMade = IntegerProperty(required=True)
+    FtMadePerGame = IntegerProperty(required=True)
+    FtPct = IntegerProperty(required=True)
+    OffReb = IntegerProperty(required=True)
+    OffRebPerGame = IntegerProperty(required=True)
+    DefReb = IntegerProperty(required=True)
+    DefRebPerGame = IntegerProperty(required=True)
+    Reb = IntegerProperty(required=True)
+    RebPerGame = IntegerProperty(required=True)
+    Ast = IntegerProperty(required=True)
+    AstPerGame = IntegerProperty(required=True)
+    Pts = IntegerProperty(required=True)
+    PtsPerGame = IntegerProperty(required=True)
+    Tov = IntegerProperty(required=True)
+    TovPerGame = IntegerProperty(required=True)
+    Stl = IntegerProperty(required=True)
+    StlPerGame = IntegerProperty(required=True)
+    Blk = IntegerProperty(required=True)
+    BlkPerGame = IntegerProperty(required=True)
+    BlkAgainst = IntegerProperty(required=True)
+    BlkAgainstPerGame = IntegerProperty(required=True)
+    FoulPers = IntegerProperty(required=True)
+    FoulPersPerGame = IntegerProperty(required=True)
+    PlusMinus = IntegerProperty(required=True)
+    PlusMinusPerGame = IntegerProperty(required=True)
+    MinSeconds = IntegerProperty(required=True)
+    MinSecondsPerGame = IntegerProperty(required=True)
+    
+    # Properties
+    player = RelationshipFrom(Player, "HAS_STAT")
+    season = RelationshipTo(Season, "IN_SEASON")
+    team = RelationshipTo(Team, "IN_TEAM")
