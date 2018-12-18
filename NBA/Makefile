@@ -20,3 +20,4 @@ msf:
 	@python src/_generate_msf_player_file.py
 	@python src/_generate_msf_play_by_play_file.py
 	@python src/_generate_msf_player_stats.py
+	@python src/_generate_msf_lineup.py
