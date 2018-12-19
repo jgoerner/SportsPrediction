@@ -6,9 +6,13 @@ from neomodel import (
     RelationshipFrom,
     RelationshipTo,
     StructuredNode,
+    StructuredRel,
     StringProperty
 )
 
+
+class StartsInRel(StructuredRel):
+    for_team = StringProperty()
 
 
 class Player(StructuredNode):
@@ -47,11 +51,10 @@ class Player(StructuredNode):
     draftedRound = IntegerProperty(required=True)
     draftedRoundPick = IntegerProperty(required=True)
     draftedOverallPick = IntegerProperty(required=True)
-    nbaID = IntegerProperty() 
+    nbaID = IntegerProperty()
     
-    # RELATIONSHIPS
-    # TODO: birthCity
-    # TODO: birthCountry
+    # RELATIONSHIP
+    startsIn = RelationshipTo("Game", "STARTS_IN", model=StartsInRel)
     
     
 class Country(StructuredNode):

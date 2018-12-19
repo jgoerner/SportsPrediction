@@ -10,10 +10,9 @@ graph: data armageddon
 	@python src/_create_team_division_conference.py
 	@python src/_connect_team_arena.py
 	@python src/_create_game.py
-	@python src/_create_player_stats.py
-
-old:
 	@python src/_create_play_by_play.py
+	@python src/_create_player_stats.py
+	@python src/_connect_player_starter_game.py
 
 msf:
 	@python src/_generate_msf_season_file.py
