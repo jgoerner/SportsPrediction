@@ -22,6 +22,7 @@ FEATURES = {
     ORDER BY 
         team, season
     """,
+    
     "wins_per_team_per_season_as_home":
     """
     MATCH 
@@ -38,6 +39,7 @@ FEATURES = {
     ORDER BY 
         team, season
     """,
+    
     "wins_per_team_per_season_as_guest":
     """
     MATCH 
@@ -54,6 +56,7 @@ FEATURES = {
     ORDER BY 
         team, season
     """,
+    
     "losses_per_team_per_season": 
     """
     MATCH 
@@ -68,6 +71,7 @@ FEATURES = {
     ORDER BY 
         team, season
     """,
+    
     "losses_per_team_per_season_as_home":
     """
     MATCH 
@@ -84,6 +88,7 @@ FEATURES = {
     ORDER BY 
         team, season
     """,
+    
     "losses_per_team_per_season_as_guest":
     """
     MATCH 
@@ -100,6 +105,7 @@ FEATURES = {
     ORDER BY 
         team, season
     """,
+    
     "average_score_margin_regular_season":
     """
     MATCH 
@@ -115,6 +121,7 @@ FEATURES = {
     ORDER BY 
         team, season
     """,
+    
     "average_score_margin_regular_season_as_home":
     """
     MATCH 
@@ -132,6 +139,7 @@ FEATURES = {
     ORDER BY 
         team, season
     """,
+    
     "average_score_margin_regular_season_as_guest":
     """
     MATCH 
@@ -149,6 +157,7 @@ FEATURES = {
     ORDER BY 
         team, season
     """,
+    
     "all_games":
     """
     MATCH 
@@ -167,7 +176,26 @@ FEATURES = {
         CASE WHEN s.score > s2.score THEN 1 ELSE 0 END as home_win
     """,
     
-    #Features Iteration 2
+    "all_games_with_id":
+    """
+    MATCH 
+        (t:Team)-[:SCORED]->(s:Score)-[:IN_GAME]->(g:Game)<-[:IN_GAME]-(s2:Score)<-[:SCORED]-(t2:Team), 
+        (sea:Season)
+    WHERE 
+        (g)-[:TOOK_PLACE_IN]->(sea)
+    AND
+        right(g.game_name, 3) = t.abbreviation
+    RETURN
+        g.game_id as game_id,
+        sea.name as season,
+        t.name as team_home,
+        t2.name as team_guest,
+        s.score as score_home,
+        s2.score as score_guest,
+        CASE WHEN s.score > s2.score THEN 1 ELSE 0 END as home_win
+    """,
+    
+    ### Iteration 2 ###
     "list_all_games_with_location": 
     """
     MATCH (t:Team)-[sc:SCORED]->(s:Score)-[ig:IN_GAME]->(g:Game)-[po:PLAYED_ON]->(d:Date), (sea:Season), (a:Arena)
@@ -184,8 +212,33 @@ FEATURES = {
         a.longitude as long,
         a.latitude as lat
     ORDER BY team, date
-    
     """,
+    
+    "avg_starter_score_preceeding_season":
+    """
+    MATCH 
+        (st:Stat)<-[:HAS_STAT]-(p:Player)-[:STARTS_IN]->(g:Game)-[:TOOK_PLACE_IN]->(sea:Season),
+        (t)-[:SCORED]->(sc:Score)-[:IN_GAME]->(g),
+        (s:Season)
+    WHERE
+        LEFT(g.game_type,7) = LEFT(st.season_type,7)
+    AND
+        (st)-[:IN_SEASON]->(s)
+    AND
+        (st)-[:IN_TEAM]->(t)
+    AND
+        s.name = toString(toInt(SUBSTRING(sea.name, 0, 4))-1) + "/" + toString(toInt(SUBSTRING(sea.name, 5))-1)
+    RETURN 
+        AVG(st.Pts) as avg_pts,
+        t.name as team,
+        t.abbreviation as team_abbreviation,
+        g.game_name as game, 
+        g.game_id as game_id,
+        g.game_type as game_type,
+        sea.name as season,
+        s.name as preceeding_season
+    ORDER BY sea.name, t.abbreviation
+    """
 }
 
 def get_feature(feature_name):
@@ -203,7 +256,8 @@ def get_feature(feature_name):
     """
     # check if feature is valid
     if not feature_name in FEATURES.keys():
-        print("{feature_name} is not a proper feature name".format(**locals()))
+        print("'{feature_name}' is not a proper feature name\n".format(**locals()))
+        print("Choose one of the following:\n - " + "\n - ".join([str(k) for k in FEATURES.keys()]))
         return
     
     # derive feature
